@@ -1,0 +1,28 @@
+{
+  "name": "newamerica-content",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^5.8.29",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "mysql": "^2.9.0",
+    "pg": "^4.4.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "sequelize": "^3.12.2"
+  },
+  "devDependencies": {
+    "gulp-babel": "^5.3.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-sass": "^2.1.0",
+    "gulp-watch": "^4.3.5"
+  }
+}
