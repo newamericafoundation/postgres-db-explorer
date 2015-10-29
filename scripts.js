@@ -9,7 +9,8 @@ var tableSwitchCommands = tables.map((table) => { return `--table=${table}`; }).
 var scripts = {
 	connect: `psql --host=${RDS_HOSTNAME} --port=${RDS_PORT} --username=${RDS_USERNAME} --password --dbname=${RDS_DB_NAME}`,
 	dump: `sudo pg_dump --host=${RDS_HOSTNAME} --port=${RDS_PORT} --username=${RDS_USERNAME} --password --dbname=${RDS_DB_NAME} ${tableSwitchCommands} > /bp/dump.sql`,
-	createLocal: `createdb ${RDS_DB_NAME} > dump.sql`,
+	createLocal: `createdb ${RDS_DB_NAME}`,
+	restoreLocal: `psql ${RDS_DB_NAME} < dump.sql`,
 	deleteLocal: `dropdb ${RDS_DB_NAME}`
 }
 

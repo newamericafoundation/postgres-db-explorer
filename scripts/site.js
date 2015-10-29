@@ -69,11 +69,13 @@ console.log('Hi, Mom!');
 					<ul className='button-group'>
 						{ this.renderTables() }
 					</ul>
-					{ this.renderCurrentTable() }
+
 					<ul className='button-group'>
-						<li><a className='button' href="#" onClick={ this.increaseOffset.bind(this) }>Next</a></li>
-						<li><a className='button' href="#" onClick={ this.decreaseOffset.bind(this) }>Previous</a></li>
+						<li><a className='button tiny' href="#" onClick={ this.increaseOffset.bind(this) }>Next</a></li>
+						<li><a className='button tiny' href="#" onClick={ this.decreaseOffset.bind(this) }>Previous</a></li>
 					</ul>
+					{ this.renderCurrentTable() }
+					
 				</div>
 			);
 		}
@@ -84,19 +86,25 @@ console.log('Hi, Mom!');
 		 *
 		 */
 		renderTables() {
-			return tables.map((table) => {
+			var tableContent = tables.map((table, i) => {
 				return (
-					<li className='inline-list'>
+					<dd key={i} className={ (this.state.activeTable === table) ? 'active' : '' }>
 						<a 
 							href="#"
 							onClick={this.switchActiveTable.bind(this, table)}
-							className={ 'button tiny ' + (this.state.activeTable === table ? ' success' : '') }
 						>
 							{ table }
 						</a>
-					</li>
+					</dd>
 				);
 			});
+
+			return (
+				<dl className='sub-nav'>
+					<dt>Table</dt>
+					{ tableContent }
+				</dl>
+			);
 		}
 
 

@@ -4,7 +4,7 @@ var express = require('express');
 
 var router = require('./routes/index.js');
 
-var scripts = require('./scripts.js');
+// var scripts = require('./scripts.js');
 
 var app = express();
 

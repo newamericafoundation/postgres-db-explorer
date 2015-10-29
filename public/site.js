@@ -82,7 +82,6 @@ console.log('Hi, Mom!');
 						{ className: "button-group" },
 						this.renderTables()
 					),
-					this.renderCurrentTable(),
 					React.createElement(
 						"ul",
 						{ className: "button-group" },
@@ -91,7 +90,7 @@ console.log('Hi, Mom!');
 							null,
 							React.createElement(
 								"a",
-								{ className: "button", href: "#", onClick: this.increaseOffset.bind(this) },
+								{ className: "button tiny", href: "#", onClick: this.increaseOffset.bind(this) },
 								"Next"
 							)
 						),
@@ -100,11 +99,12 @@ console.log('Hi, Mom!');
 							null,
 							React.createElement(
 								"a",
-								{ className: "button", href: "#", onClick: this.decreaseOffset.bind(this) },
+								{ className: "button tiny", href: "#", onClick: this.decreaseOffset.bind(this) },
 								"Previous"
 							)
 						)
-					)
+					),
+					this.renderCurrentTable()
 				);
 			}
 
@@ -117,21 +117,31 @@ console.log('Hi, Mom!');
 			value: function renderTables() {
 				var _this = this;
 
-				return tables.map(function (table) {
+				var tableContent = tables.map(function (table, i) {
 					return React.createElement(
-						"li",
-						{ className: "inline-list" },
+						"dd",
+						{ key: i, className: _this.state.activeTable === table ? 'active' : '' },
 						React.createElement(
 							"a",
 							{
 								href: "#",
-								onClick: _this.switchActiveTable.bind(_this, table),
-								className: 'button tiny ' + (_this.state.activeTable === table ? ' success' : '')
+								onClick: _this.switchActiveTable.bind(_this, table)
 							},
 							table
 						)
 					);
 				});
+
+				return React.createElement(
+					"dl",
+					{ className: "sub-nav" },
+					React.createElement(
+						"dt",
+						null,
+						"Table"
+					),
+					tableContent
+				);
 			}
 
 			/*
