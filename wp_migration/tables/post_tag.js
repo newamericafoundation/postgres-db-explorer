@@ -4,8 +4,6 @@ export default {
 
 	destinationTableName: 'wp_rxlk_term_relationships',
 
-
-
 	fields: [
 
 		{
