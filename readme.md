@@ -1,0 +1,1 @@
+Postgres database explorer tool, with tools to browse, clean up and export the contents of a database.

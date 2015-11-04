@@ -1,6 +1,7 @@
 import pg from 'pg';
 import express from 'express';
 import json2csv from 'json2csv';
+import fs from 'fs';
 
 var conString = "postgres://localhost/newamerica";
 
@@ -38,6 +39,27 @@ router.get('/api/v1/:table_name', (req, res) => {
 		return res.json(data.rows);
 	});
 
+});
+
+// Save a table as JSON.
+router.get('/api/v1/:table_name/save', (req, res) => {
+
+	var client = req.dbClient;
+
+	var command = `SELECT * FROM ${req.params.table_name}`;
+
+	command += ' ' + getCommandModifiers(req);
+
+	console.log(command);
+
+	client.query(command, (err, data) => {
+
+		fs.writeFile(`wp_migration/json_dump/${req.params.table_name}.json`, JSON.stringify(data.rows), (err) => {
+			if (err) { return res.json({ message: 'there was an error saving the file' }); }
+			return res.json({ message: 'file saved successfully' });
+		});
+
+	});
 
 });
 

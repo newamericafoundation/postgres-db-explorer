@@ -1,4 +1,4 @@
-import rdsConnect from './../secrets/rds_connect.json';
+import rdsConnect from './secrets.json';
 
 var { RDS_HOSTNAME, RDS_PORT, RDS_USERNAME, RDS_DB_NAME } = rdsConnect;
 

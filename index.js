@@ -1,3 +1,3 @@
 require('babel/register');
 
-require('./wp_migration/index.js');
+require('./exporter/index.js');
