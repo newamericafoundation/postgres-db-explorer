@@ -1,14 +1,12 @@
 export default {
 
-	originTableName: 'doc_cms_user',
-
-	destinationTableName: 'wp_rxlk_users',
+	jsonDumpFile: 'users.json',
 
 	originIdKey: 'id',
 
 	foreignIdKey: 'user_id',
 
-	tableNames: [ 'users', 'terms', 'term_taxonomies' ],
+	tableNames: [ 'users', 'terms', 'term_taxonomy' ],
 
 	fields: [
 
@@ -20,7 +18,7 @@ export default {
 
 		{
 			originKey: null,
-			key: 'password',
+			key: 'user_pass',
 			tableName: 'users',
 			value: '$asdffdsaasdf1999oopp'
 		},
@@ -59,6 +57,13 @@ export default {
 		},
 
 		{
+			originKey: null,
+			key: 'wp_capabilities',
+			isMeta: true,
+			value: 'a:1:{s:6:\\"editor\\";b:1;}'
+		},
+
+		{
 			originKey: 'full_name',
 			isMeta: true,
 			key: 'first_name',
@@ -79,9 +84,6 @@ export default {
 			converterKey: 'twitterHandleToLink'
 		},
 
-
-
-
 		{
 			originKey: 'id',
 			tableName: 'terms',
@@ -98,14 +100,14 @@ export default {
 
 		{
 			originKey: 'id',
-			tableName: 'term_taxonomies',
+			tableName: 'term_taxonomy',
 			key: 'term_taxonomy_id',
 			converterKey: null
 		},
 
 		{
 			originKey: 'id',
-			tableName: 'term_taxonomies',
+			tableName: 'term_taxonomy',
 			key: 'term_id',
 			converterKey: null
 		},
@@ -127,7 +129,7 @@ export default {
 
 		{
 			originKey: null,
-			tableName: 'term_taxonomies',
+			tableName: 'term_taxonomy',
 			key: 'taxonomy',
 			value: 'author'
 		}

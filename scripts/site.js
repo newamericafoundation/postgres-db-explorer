@@ -34,7 +34,6 @@ console.log('Hi, Mom!');
 	];
 
 
-
 	class Layout extends React.Component {
 
 		/*
@@ -133,17 +132,19 @@ console.log('Hi, Mom!');
 			});
 
 			return (
-				<table>
-					<thead>
-						<tr>
-							{ tableHeadContent }
-						</tr>
-					</thead>
+				<div className='pe__table'>
+					<table>
+						<thead>
+							<tr>
+								{ tableHeadContent }
+							</tr>
+						</thead>
 
-					<tbody>
-						{ tableContent }
-					</tbody>
-				</table>
+						<tbody>
+							{ tableContent }
+						</tbody>
+					</table>
+				</div>
 			);
 		}
 

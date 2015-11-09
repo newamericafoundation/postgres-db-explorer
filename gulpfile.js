@@ -24,6 +24,6 @@ gulp.task('dev', function() {
 });	
 
 gulp.task('spec', function() {
-	gulp.src('./wp_migration/converters/__spec/field_spec.js')
+	gulp.src('./exporter/converters/__spec/field_spec.js')
 		.pipe(mocha({ reporter: 'spec' }));
 });

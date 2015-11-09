@@ -64,7 +64,7 @@ class TableConverter {
 
 		var value = item[field.originKey];
 
-		if (value == null) { return value; }
+		if (value == null) { return field.value; }
 
 		// If there is a converter, apply on item.
 		if (field.converterKey) {

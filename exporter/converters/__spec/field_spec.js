@@ -41,4 +41,14 @@ describe('field converters', () => {
 
 	});
 
+	describe('escapeForMySqlInsert', () => {
+
+		var { escapeForMySqlInsert } = fieldConverters;
+
+		it('replaces quotes with double quotes', () => {
+			assert.equal(escapeForMySqlInsert("a'b"), "a\\\'b");
+		});
+
+	});
+
 });

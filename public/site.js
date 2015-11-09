@@ -182,21 +182,25 @@ console.log('Hi, Mom!');
 				});
 
 				return React.createElement(
-					"table",
-					null,
+					"div",
+					{ className: "pe__table" },
 					React.createElement(
-						"thead",
+						"table",
 						null,
 						React.createElement(
-							"tr",
+							"thead",
 							null,
-							tableHeadContent
+							React.createElement(
+								"tr",
+								null,
+								tableHeadContent
+							)
+						),
+						React.createElement(
+							"tbody",
+							null,
+							tableContent
 						)
-					),
-					React.createElement(
-						"tbody",
-						null,
-						tableContent
 					)
 				);
 			}

@@ -1,4 +1,5 @@
-dumps
+__dumps
+__exports
 connect/secrets.json
 node_modules
 bower_components

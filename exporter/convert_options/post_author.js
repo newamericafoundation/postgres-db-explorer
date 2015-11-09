@@ -1,5 +1,7 @@
 export default {
 
+	jsonDumpFile: 'post_authors.json',
+
 	tableNames: [ 'term_relationships' ],
 
 	fields: [

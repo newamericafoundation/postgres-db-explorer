@@ -1,9 +1,8 @@
 export default {
 
-	originTableName: 'doc_cms_post',
+	jsonDumpFile: 'posts.json',
 
 	originIdKey: 'id',
-
 	foreignIdKey: 'post_id',
 
 	tableNames: [ 'posts' ],
@@ -46,7 +45,7 @@ export default {
 		{
 			tableName: 'posts',
 			originKey: 'created',
-			key: 'post_data_gmt',
+			key: 'post_date_gmt',
 			converterKey: 'time'
 		},
 
@@ -67,17 +66,19 @@ export default {
 		{
 			tableName: 'posts',
 			originKey: 'summary',
-			key: 'post_exerpt',
-			converterKey: 'replacePattern',
-			converterOptions: { pattern: '\\|', replacement: '&#124;' }
+			key: 'post_excerpt',
+			converterKey: 'escapeForMySqlInsert'
+			// converterKey: 'replacePattern',
+			// converterOptions: { pattern: '\\|', replacement: '&#124;' }
 		},
 
 		{
 			tableName: 'posts',
 			originKey: 'content',
 			key: 'post_content',
-			converterKey: 'replacePatterm',
-			converterOptions: { pattern: '\\|', replacement: '&#124;' }
+			converterKey: 'escapeForMySqlInsert'
+			// converterKey: 'replacePatterm',
+			// converterOptions: { pattern: '\\|', replacement: '&#124;' }
 		}
 
 	]

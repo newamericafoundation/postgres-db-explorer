@@ -2,40 +2,20 @@ import TableConverter from './converters/table.js';
 
 import * as convertOptions from './convert_options/index.js';
 
-import writeCsv from './write_csv.js';
+import writeTableSqlQueries from './writers/table_sql_query.js';
 
+function exportTable() {
 
-function exportPostAuthors() {
+	var key = 'users';
 
-	var tc = new TableConverter(convertOptions['postAuthors']);
-	tc.setOriginCollection(require('./../dumps/json/post_authors.json'));
+	var opt = convertOptions[key];
+
+	var tc = new TableConverter(opt);
+	tc.setOriginCollection(require(`./../__exports/json/${opt.jsonDumpFile}`));
 	tc.convertCollection();
 
-	writeCsv(tc.results, 'post_authors');
+	writeTableSqlQueries(tc.results, `${key}__`);
 
-};
+}
 
-
-function exportPosts() {
-
-	var tc = new TableConverter(convertOptions['posts']);
-	tc.setOriginCollection(require('./../dumps/json/posts.json'));
-	tc.convertCollection();
-
-	writeCsv(tc.results, 'posts');
-
-};
-
-
-function exportUsers() {
-
-	var tc = new TableConverter(convertOptions['users']);
-	tc.setOriginCollection(require('./../dumps/json/users.json'));
-	tc.convertCollection();
-
-	writeCsv(tc.results, 'users');
-
-};
-
-
-exportPostAuthors();
+exportTable();
