@@ -1,6 +1,6 @@
 export default {
 
-	jsonDumpFile: 'users.json',
+	file: 'users.json',
 
 	originIdKey: 'id',
 

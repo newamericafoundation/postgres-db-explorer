@@ -1,6 +1,6 @@
 export default {
 
-	jsonDumpFile: 'posts.json',
+	file: 'posts.json',
 
 	originIdKey: 'id',
 	foreignIdKey: 'post_id',

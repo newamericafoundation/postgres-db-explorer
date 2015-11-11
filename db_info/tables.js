@@ -1,4 +1,4 @@
-[
+export default [
 	{ 
 		"name": "doc_cms_article", 
 		"exportName": "post_type_articles" 

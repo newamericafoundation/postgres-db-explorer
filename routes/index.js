@@ -1,92 +1,84 @@
-import pg from 'pg';
-import express from 'express';
-import json2csv from 'json2csv';
-import fs from 'fs';
-
-var conString = "postgres://localhost/newamerica";
+var express  = require('express');
+var json2csv = require('json2csv');
+var fs = require('fs');
 
 var router = express.Router();
 
-
 /*
- *
+ * Render main route that serves client-side app.
  *
  */
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
 	res.render('index');
-});
+})
 
 
 /*
- *
+ * Returns limit and offset modifiers that are appended to a query.
  *
  */
-var getCommandModifiers = (req) => {
-	var { limit, offset } = req.query;
+var getCommandModifiers = function(req) {
+	var limit = req.query.limit;
+	var offset = req.query.offset;
 	var commandModifiers = [];
-	if (limit != null) { commandModifiers.push(`LIMIT ${limit}`); }
-	if (offset != null) { commandModifiers.push(`OFFSET ${offset}`); }
+	if (limit != null) { commandModifiers.push('LIMIT ' + limit) }
+	if (offset != null) { commandModifiers.push('OFFSET ' + offset) }
 	return commandModifiers.join(' ');
-};
+}
 
 
 /*
- *
+ * Returns the contents of a table in JSON.
  *
  */
-router.get('/api/v1/:table_name', (req, res) => {
+router.get('/api/v1/:table_name', function(req, res) {
 
 	var client = req.dbClient;
 
-	var command = `SELECT * FROM ${req.params.table_name}`;
+	var command = 'SELECT * FROM ' + req.params.table_name;
 
 	command += ' ' + getCommandModifiers(req);
 
-	client.query(command, (err, data) => {
+	client.query(command, function(err, data) {
 		if (err) { console.log(err); return res.json({ message: 'no turkeys' }); }
 		return res.json(data.rows);
 	});
 
-});
+})
 
 
 /*
  * Save a table as JSON.
  *
  */
-router.get('/api/v1/:table_name/save_json', (req, res) => {
+router.get('/api/v1/:table_name/save_json', function(req, res) {
 
 	var client = req.dbClient;
 
-	var command = `SELECT * FROM ${req.params.table_name}`;
+	var command = 'SELECT * FROM ' + req.params.table_name;
+
+	var start_id = (req.query.start_id != null) ? Number(req.query.start_id) : null,
+		id_key = req.query.id_key || 'id';
 
 	command += ' ' + getCommandModifiers(req);
 
-	client.query(command, (err, data) => {
-		fs.writeFile(`__exports/json/${req.params.table_name}.json`, JSON.stringify(data.rows), (err) => {
+	client.query(command, function(err, data) {
+
+		var rows = data.rows;
+
+		if (start_id != null) {
+			rows.forEach(function(row, i) {
+				row[id_key] = start_id + i
+			})
+		}
+
+		fs.writeFile('__exports/json/' + req.params.table_name + '.json', JSON.stringify(rows), function(err) {
 			if (err) { return res.json({ message: 'there was an error saving the file' }); }
 			return res.json({ message: 'file saved successfully' });
 		});
+
 	});
 
-});
+})
 
-
-/*
- *
- *
- */
-router.get('/api/v1/:table_name/info', (req, res) => {
-
-	var client = req.dbClient;
-
-	var command = `\\d ${req.params.table_name}`;
-
-	client.query(command, (err, data) => {
-		if (err) { console.log(err); return res.json({ message: 'no turkeys' }); }
-		return res.json(data);
-	});
-
-});
-
-export default router;
+module.exports = router
