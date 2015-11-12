@@ -1,10 +1,17 @@
+var path = require('path'),
+	webpack = require('webpack');
+
 module.exports = {
 
-	entry: './scripts/site.js',
+	entry: [ 
+		'./scripts/site.js',
+		'webpack-hot-middleware/client'
+	],
 
 	output: {
-		path: './public',
-		filename: 'site.js'
+		path: path.resolve('./public/'),
+		filename: 'site.js',
+		publicPath: 'http://localhost:1848/'
 	},
 
 	module: {
@@ -22,8 +29,25 @@ module.exports = {
 				loaders: [ "style", "css", "sass" ]
 			}
 		]
-	}, 
+	},
 
-	resolveLoader: [ 'node_modules' ]
+	sassLoader: {
+	    includePaths: [path.resolve(__dirname, "./node_modules")]
+	},
+
+	resolveLoader: [ 'node_modules' ],
+
+	resolve: {
+		alias: {
+			'react': __dirname + '/node_modules/react',
+			'react-dom': __dirname + '/node_modules/react-dom'
+		}
+	},
+
+	plugins: [
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin()
+	]
 	
 }

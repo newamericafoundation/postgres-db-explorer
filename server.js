@@ -1,15 +1,29 @@
 // require('babel-core/register');
 
 var express = require('express'),
+	webpackDevMiddleware = require('webpack-dev-middleware'),
+	webpackHotMiddleware = require('webpack-hot-middleware'),
+	webpack = require('webpack'),
+	webpackConfig = require('./webpack.config.js'),
 	pg = require('pg'),
 	dbConnect = require('./db_info/db_connect.json');
+
+var webpackCompiler = webpack(webpackConfig);
 
 var router = require('./routes/index.js');
 
 var app = express();
 
+// require('./exporter/table_convert_settings/api_to_json/index.js');
+
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
+
+app.use(webpackDevMiddleware(webpackCompiler, {
+	lazy: false
+}));
+
+app.use(webpackHotMiddleware(webpackCompiler));
 
 app.use(express.static('public'));
 

@@ -62,6 +62,8 @@ router.get('/api/v1/:table_name/save_json', function(req, res) {
 
 	command += ' ' + getCommandModifiers(req);
 
+	var fileName = req.params.export_file_name || req.params.table_name
+
 	client.query(command, function(err, data) {
 
 		var rows = data.rows;

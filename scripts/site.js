@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
-import { AppBar, FlatButton } from 'material-ui'
+import { AppBar, FlatButton, IconButton } from 'material-ui'
 
 import DataTable from './data_table.js'
 
@@ -36,13 +36,14 @@ class Layout extends React.Component {
 			return (
 				<div>
 					<AppBar title='Postgres DB Explorer' />
-					<ul>
+					<h1>Tables</h1>
+					<div>
 						{ this.renderTables() }
-					</ul>
-					<ul>
-						<li><a className='button tiny' href="#" onClick={ this.increaseOffset.bind(this) }>Next</a></li>
-						<li><a className='button tiny' href="#" onClick={ this.decreaseOffset.bind(this) }>Previous</a></li>
-					</ul>
+					</div>
+					<div>
+						<IconButton iconClassName="muidocs-icon-action-home" tooltip="Previous" onClick={ this.decreaseOffset.bind(this) } />
+						<IconButton iconClassName="muidocs-icon-action-home" tooltip="Next" onClick={ this.increaseOffset.bind(this) } />
+					</div>
 					{ this.renderCurrentTable() }
 				</div>
 			)
@@ -54,7 +55,7 @@ class Layout extends React.Component {
 		 *
 		 */
 		renderTables() {
-			var tableContent = tables.map((table, i) => {
+			return tables.map((table, i) => {
 				return (
 					<FlatButton 
 						key={i} 
@@ -64,13 +65,6 @@ class Layout extends React.Component {
 					/>
 				)
 			})
-
-			return (
-				<dl className='sub-nav'>
-					<dt>Table</dt>
-					{ tableContent }
-				</dl>
-			)
 		}
 
 
@@ -90,7 +84,7 @@ class Layout extends React.Component {
 		 *
 		 */
 		increaseOffset(e) {
-			e.preventDefault()
+			if (e) { e.preventDefault() }
 			var newTableDataOffset = this.state.tableDataOffset + 10
 			this.setState({ tableDataOffset: newTableDataOffset })
 		}
@@ -101,7 +95,7 @@ class Layout extends React.Component {
 		 *
 		 */
 		decreaseOffset(e) {
-			e.preventDefault()
+			if (e) { e.preventDefault() }
 			var newTableDataOffset = this.state.tableDataOffset - 10
 			if (newTableDataOffset < 0) { newTableDataOffset = 0 }
 			this.setState({ tableDataOffset: newTableDataOffset })
