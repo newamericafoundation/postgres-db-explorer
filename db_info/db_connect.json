@@ -1,6 +1,4 @@
 {
 	"dbName": "newamerica",
-	  "host": "localhost",
-    "user": "postgres",
-    "password": "eit6yah2Chea"
+	"host": "localhost"
 }

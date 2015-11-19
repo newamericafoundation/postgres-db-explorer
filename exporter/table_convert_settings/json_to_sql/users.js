@@ -1,6 +1,6 @@
 export default {
 
-	file: 'users.json',
+	file: 'doc_cms_user.json',
 
 	originIdKey: 'id',
 

@@ -4,9 +4,7 @@ import * as convertOptions from './table_convert_settings/json_to_sql/index.js'
 
 import writeTableSqlQueries from './writers/table_sql_query.js'
 
-function exportTable() {
-
-	var key = 'users'
+export function exportTable(key) {
 
 	var opt = convertOptions[key]
 
@@ -17,5 +15,3 @@ function exportTable() {
 	writeTableSqlQueries(tc.results, `${key}__`)
 
 }
-
-exportTable()

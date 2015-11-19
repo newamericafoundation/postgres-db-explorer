@@ -1,3 +1,5 @@
-require('babel/register');
+require('babel-core/register');
 
-require('./exporter/index.js');
+var exportTable = require('./exporter/index.js').exportTable;
+
+exportTable('users');

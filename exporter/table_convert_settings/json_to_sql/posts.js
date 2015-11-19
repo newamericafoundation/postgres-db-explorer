@@ -1,6 +1,6 @@
 export default {
 
-	file: 'posts.json',
+	file: 'doc_cms_post.json',
 
 	originIdKey: 'id',
 	foreignIdKey: 'post_id',

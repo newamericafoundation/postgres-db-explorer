@@ -1,6 +1,6 @@
 export default {
 
-	file: 'post_authors.json',
+	file: 'doc_cms_post_authors.json',
 
 	tableNames: [ 'term_relationships' ],
 

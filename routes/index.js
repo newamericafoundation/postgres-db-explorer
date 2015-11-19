@@ -49,7 +49,7 @@ router.get('/api/v1/:table_name', function(req, res) {
 
 /*
  * Save a table as JSON.
- *
+ * Takes exports_file_name query string that defaults to the table name.
  */
 router.get('/api/v1/:table_name/save_json', function(req, res) {
 
