@@ -28,7 +28,7 @@ app.use(webpackHotMiddleware(webpackCompiler));
 app.use(express.static('public'));
 
 // Build Postgres connection string.
-var connectionString = "postgres://" + dbConnect.host + "/" + dbConnect.dbName;
+var connectionString = "postgres://" + dbConnect.user + ":" + dbConnect.password + "@" + dbConnect.host + "/" + dbConnect.dbName;
 
 pg.connect(connectionString, function(err, client, done) {
 
