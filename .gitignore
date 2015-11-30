@@ -1,5 +1,6 @@
 __dumps
 __exports
+.env
 connect/secrets.json
 db_info/db_connect.json
 node_modules

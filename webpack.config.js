@@ -4,8 +4,7 @@ var path = require('path'),
 module.exports = {
 
 	entry: [ 
-		'./scripts/site.js',
-		'webpack-hot-middleware/client'
+		'./scripts/site.js'
 	],
 
 	output: {
@@ -46,7 +45,6 @@ module.exports = {
 
 	plugins: [
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	]
 	

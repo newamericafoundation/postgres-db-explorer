@@ -1,21 +1,39 @@
 // Convert a database table to a Wordpress-importable CSV.
 
-import fieldConverter from './field.js';
+import fieldConverter from './field.js'
 
+/*
+ * Class that converts the JSON array representation of a database table into several new tables according to its options.
+ * Syntax for options object:
+ * options.fields = [
+ *   {
+ *     originKey: "",
+ *     converterKey: "",
+ *     converterOptions: "",
+ *     isMeta: true, //
+ *     tableNames: [] // list of all tables 
+ *   },
+ *   { ... },
+ *   { ... }
+ * [
+ *
+ *
+ */
 class TableConverter {
 
 	/*
-	 *
-	 *
+	 * Class constructor
+	 * @param {options} options - Conversion options.
 	 */
 	constructor(options) {
-		this.options = options;
+		this.options = options
+		return this
 	}
 
 
 	/*
-	 *
-	 *
+	 * Sets the data to be converted under 'originCollection'.
+	 * @param {array} data - Array of objects.
 	 */
 	setOriginCollection(data) {
 		this.originCollection = data;
@@ -23,7 +41,7 @@ class TableConverter {
 
 
 	/*
-	 * Reset result collections.
+	 * Resets result collections into empty objects.
 	 *
 	 */
 	resetResults() {
@@ -34,7 +52,7 @@ class TableConverter {
 		}
 
 		for (let tableName of this.options.tableNames) {
-			this.results.collections[tableName] = [];
+			this.results.collections[tableName] = []
 		}
 
 	}
@@ -49,7 +67,7 @@ class TableConverter {
 		var items = {};
 
 		for (let tableName of this.options.tableNames) {
-			items[tableName] = {};
+			items[tableName] = {}
 		}
 
 		return items;
@@ -68,10 +86,8 @@ class TableConverter {
 
 		// If there is a converter, apply on item.
 		if (field.converterKey) {
-			let converter = fieldConverter[field.converterKey];
-			if (converter) {
-				value = converter(value, field.converterOptions);
-			}
+			let converter = fieldConverter[field.converterKey]
+			if (converter) { value = converter(value, field.converterOptions) }
 		}
 
 		return value;
@@ -140,4 +156,4 @@ class TableConverter {
 
 }
 
-export default TableConverter;
+export default TableConverter

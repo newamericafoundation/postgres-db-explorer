@@ -1,19 +1,44 @@
-import moment from 'moment';
+/*
+ * This module returns an object that contains custom converter functions that are run on different values found in the database.
+ * Each converter is uniquely identified by its key. Table convert settings files, for instance, have converterKey and converterOptions fields that point to these functions.
+ * Customize for messy data as needed.
+ *
+ *
+ */
+
+import moment from 'moment'
 
 export default {
 
 	/*
-	 *
-	 *
+	 * Set time format. See moment.js docs for details.
+	 * @param {string} val - Time in UTF format. Note: not sure how time zone shifts are handled.
+	 * @param {string} formatString - Specifies how time should be formatted. Defaults to what Wordpress expects.
+	 * @returns {string}
 	 */
-	time: (val) => {
-		return moment(val).format('YYYY-MM-DD HH:mm:ss');
+	time: (val, formatString = 'YYYY-MM-DD HH:mm:ss') => {
+		return moment(val).format(formatString);
+	},
+
+
+	/*
+	 * Separates login from e-mail and adds a prefix. Returns empty string if @ character is not found.
+	 * @param {string} val
+	 * @param {object} options - Contains prefix. Set to empty string if not specified.
+	 * @returns {string}
+	 */
+	emailToLoginWithPrefix: (val, options) => {
+		var atIndex = val.indexOf('@')
+		if (atIndex < 0) { return '' }
+		var prefix = options.prefix || ''
+		return options.prefix + val.slice(0, atIndex);
 	},
 
 
 	/*
 	 * Separates login from e-mail.
-	 *
+	 * @param {string} val
+	 * @returns {string}
 	 */
 	emailToLogin: (val) => {
 		var atIndex = val.indexOf('@');
@@ -23,19 +48,9 @@ export default {
 
 
 	/*
-	 *
-	 *
-	 */
-	emailToLoginWithPrefix: (val, options) => {
-		var atIndex = val.indexOf('@');
-		if (atIndex < 0) { return ''; }
-		return options.prefix + val.slice(0, atIndex);
-	},
-
-
-	/*
-	 *
-	 *
+	 * Escapes characters inside string for SQL insert.
+	 * @param {string} val
+	 * @returns {string}
 	 */
 	escapeForMySqlInsert: (val) => {
 
@@ -68,7 +83,7 @@ export default {
 
 
 	/*
-	 *
+	 * 
 	 *
 	 */
 	twitterHandleToLink: (val) => {
@@ -87,8 +102,8 @@ export default {
 
 
 	/*
-	 *
-	 *
+	 * Separates last name from full name. 
+	 * 
 	 */
 	fullNameToLastName: (val) => {
 		if (val == null || val.split == null) { return ''; }
@@ -97,8 +112,11 @@ export default {
 
 
 	/*
-	 *
-	 *
+	 * Increment by a value specified in the options.
+	 * TODO: rename options key to 'difference'.
+	 * @param {string} val
+	 * @param {object} options
+	 * @returns {string}
 	 */
 	add: (val, options) => {
 		return (val + options.toBeAdded);
@@ -107,10 +125,13 @@ export default {
 
 	/*
 	 *
-	 *
+	 * @param {string} val
+	 * @param {object} options - Contains regex pattern under the 'pattern' key.
+	 * @returns {string}
 	 */
 	replacePattern: (val, options) => {
 		var { pattern, replacement } = options;
+		// Create matcher regex with the global flag (all matches are found within the string).
 		var matcher = new RegExp(pattern, 'g');
 		val = val.replace(matcher, replacement);
 		return val;

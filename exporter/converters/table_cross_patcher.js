@@ -1,3 +1,6 @@
+// This is a prototype for a module that takes two tables as JSON arrays and modifies them assuming some relation between them.
+// E.g. add a numerical id to one of the tables and and add the same id as a foreign key to the other.
+
 import _ from 'underscore'
 
 /*

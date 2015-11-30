@@ -1,19 +1,23 @@
 import React from 'react'
 import { Table, TableRow, TableRowColumn, TableHeader, TableBody, TableHeaderColumn } from 'material-ui'
 
-var DataTable = (props) => {
+/*
+ * React component for displaying the HTML the table representation of a database table.
+ *
+ */
+function DataTable(props) {
 
 	var { data } = props
 
 	if (data == null || data[0] == null) { return <Table/> }
 
-	var tableContent = data.map((datum) => {
+	var tableContent = data.map((datum, i) => {
 		var rowContent = Object.keys(datum).map((key, i) => {
 			var value = datum[key]
 			return (<TableRowColumn key={i}>{ value }</TableRowColumn>)
 		})
 		return (
-			<TableRow>{ rowContent }</TableRow>
+			<TableRow key={i}>{ rowContent }</TableRow>
 		)
 	})
 

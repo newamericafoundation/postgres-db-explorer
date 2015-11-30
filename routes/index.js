@@ -75,8 +75,14 @@ router.get('/api/v1/:table_name/save_json', function(req, res) {
 		}
 
 		fs.writeFile('__exports/json/' + req.params.table_name + '.json', JSON.stringify(rows), function(err) {
-			  if (err) { console.log(err); return res.json({ message: 'there was an error saving the file' }); }
-			return res.json({ message: 'file saved successfully' });
+			if (err) { 
+			  	console.log(err); 
+			  	return res.json({ 
+			  		message: 'There was an error saving the file',
+			  		error: err
+			  	}); 
+			}
+			return res.json({ message: 'File saved successfully.' });
 		});
 
 	});

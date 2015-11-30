@@ -1,6 +1,5 @@
 import './../styles/site.scss'
 
-// Signature :)
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'
@@ -13,6 +12,11 @@ import tableInfo from './../db_info/tables.js'
 
 var tables = tableInfo.map(t => t.name);
 
+
+/*
+ *
+ *
+ */
 class Layout extends React.Component {
 
 	/*
@@ -147,4 +151,6 @@ class Layout extends React.Component {
 
 	}
 
+// Signature :)
+console.log("Hi, Mom!");
 ReactDOM.render(<Layout />, document.getElementById('site'))
